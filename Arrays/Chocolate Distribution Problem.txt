@@ -1,0 +1,15 @@
+Chocolate Distribution Problem
+
+long long findMinDiff(vector<long long> a, long long m, long long n)
+{
+ long long min = INT_MAX;
+ sort(a.begin(), a.end());
+ 
+ for(int i=0; i+m-1 < n; ++i)
+ {
+  if( min >a[i+m-1] - a[i] )
+    {min = a[i+m-1] - a[i];}
+ }
+
+return min;
+}

@@ -1,0 +1,23 @@
+using namespace std;
+
+vector<int> twoSum(vector<int>& nums, int target)
+{
+ unordered_map<int,int> mp;
+
+ for(int i=0; i < nums.size(); ++i)
+ {
+  int rem = target - nums[i];
+  if(mp.find(rem) != mp.end())
+  {
+   return{mp[rem],i};
+  } 
+
+  mp.insert({nums[i],i});
+ }
+ 
+ return {};
+}
+
+//NOTE:
+return {mp[rem], i}; returns a pair or tuple with mp[rem] as the first element and i as the second element.
+return {(mp[rem], i)}; uses the comma operator, evaluates mp[rem] and i, and returns the value of i as a single-element initializer list, which is usually not the intended behavior.
