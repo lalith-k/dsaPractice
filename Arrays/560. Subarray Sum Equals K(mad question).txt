@@ -1,0 +1,22 @@
+560. Subarray Sum Equals K
+
+int subArraySum(vector<int>& nums, int k)
+{
+ int ans =0;
+ unordered_map<int ,int> count;
+ count[sum] = 1;
+
+ for(int num: nums)
+ {
+  sum += num;
+  if(count[sum-k] > 0)
+  {
+   sum  += count[sum-k];
+  }
+ 
+  count[sum]++;
+ }
+return sum;
+ 
+}
+

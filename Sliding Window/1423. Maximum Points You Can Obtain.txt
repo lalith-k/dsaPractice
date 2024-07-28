@@ -1,0 +1,22 @@
+1423. Maximum Points You Can Obtain from Cards
+
+int maxScore(vector<int>& cardPoints, int k)
+{
+ int leftSum=0, rightSum=0, maxSum=0;
+ for(int i=0 ; i < k; ++i)
+ {
+  leftSum += cardPoints[i];
+ }
+
+ maxSum = leftSum;
+
+ //Sliding Window part
+ for(int leftId = k -1, rightId = cardPoints.size() - 1; leftId >=0; leftId--, rightId--)
+ {
+  leftSum -= cardPoints[leftId];
+  rightSum += cardPoints[rightId];
+  maxSum = max(maxSum, leftSum + rightSum);
+ }
+ 
+ return maxSum;
+}
