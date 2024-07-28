@@ -1,0 +1,27 @@
+442. Find All Duplicates in an Array
+
+vector<int> findDuplicates(vector<int>& nums) {
+        // unordered_map<int,int> umap;
+         vector<int> result;
+
+        //  for(int num : nums){
+        //     umap[num]++;
+        //  }
+
+        // for(auto k : umap){
+        //     if(k.second == 2)
+        //     {
+        //         result.push_back(k.first);
+        //     }
+        // }
+        // return result;
+
+        vector<int> freq(nums.size() + 1);
+        for(int i=0; i< nums.size(); ++i)
+        {
+            freq[nums[i]]++;
+            if(freq[nums[i]] > 1)
+             {result.push_back(nums[i]);}
+        }
+        return result;
+    }
