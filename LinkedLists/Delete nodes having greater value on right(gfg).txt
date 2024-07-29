@@ -1,0 +1,44 @@
+Delete nodes having greater value on right
+
+    void reverseList(Node*& headref)
+    {
+     Node* prev = NULL;
+     Node* curr = headref;
+     Node* next;
+     
+     while(curr != NULL){
+         next = curr -> next;
+         curr -> next = prev;
+         prev = curr;
+         curr = next;
+     } headref = prev;
+     
+    }
+    
+    void del(Node* head)
+    {
+        Node* curr = head;
+        Node* maxNode = head;
+        
+        while(curr != NULL && curr -> next != NULL)
+        {
+            if(curr -> next -> data < maxNode -> data)
+            {
+                Node* temp = curr -> next;
+                curr -> next = temp -> next;
+                delete temp;
+            }
+            else {
+                curr = curr -> next;
+                maxNode = curr;
+            }
+        }
+    }
+    
+    Node *compute(Node *head)
+    {
+       reverseList(head);
+       del(head);
+       reverseList(head);
+       return head;
+    }
