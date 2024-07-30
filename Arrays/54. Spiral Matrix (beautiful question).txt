@@ -1,0 +1,48 @@
+54. Spiral Matrix (beautiful question, revisit)
+ vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int row = matrix.size();
+        int col = matrix[0].size();
+        int strow = 0;
+        int stcol = 0;
+        int endrow = row-1;
+        int endcol = col -1;
+        vector<int> output;
+        int count = 0;
+        int total = row * col;
+        
+       while(count < total)
+       {
+        //TOP ROW
+        for(int i = stcol; count < total && i <= endcol; ++i)
+        {
+            output.push_back(matrix[strow][i]);
+            count++;
+        }
+        strow++;
+
+        //LAST COLUMN
+        for(int i = strow; count < total && i <= endrow; ++i)
+        {
+            output.push_back(matrix[i][endcol]);
+            count++;
+        }
+        endcol--;
+
+        //BOTTOM ROW
+        for(int i = endcol; count < total && i >= stcol; i--)
+        {
+            output.push_back(matrix[endrow][i]);
+            count++;
+        }
+        endrow--;
+
+        //FIRST COLUMN
+        for(int i = endrow; count < total && i>= strow; i--)
+        {
+            output.push_back(matrix[i][stcol]);
+            count++;
+        }
+        stcol++;
+       }
+       return output;
+    }

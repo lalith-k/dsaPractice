@@ -1,0 +1,57 @@
+Machli Chapaak PhonePe question
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string getStatement(int cycle_count, int position_in_cycle, int N)
+{
+ if(position_in_cycle < N) {return to_string(cycle_count) + "machli";}
+ else if(position_in_cycle < 2*N) {return "Paani me gayi";} 
+ else if(position_in_cycle < 3*N) {return "Chapaak";}
+ 
+}
+
+int main()
+{
+ int N;
+ long long k;
+ cin>>N>>k;
+
+ int person = (k-1)%N + 1;
+
+ int cycle_count = (k-1)/(3*N) +1 ;
+ int position_in_cycle = (k-1)%(3*N);
+
+ string st = getStatement(cycle_count, position_in_cycle, N);
+
+ cout<< "P" << person << ":" << statement<< endl;
+}
+
+
+
+
+
+
+
+string getStatement(int cycle_count, int position_in_cycle, int N)
+{
+ if(position_in_cycle < N) {return to_string(cycle_count) + "machli"; }
+ else if(position_in_cycle < 2*N) {return "Paani me gayi";}
+ else if(position_in_cycle < 3*N) {return "Chapaak";}
+}
+
+int main()
+{
+ int N;
+ long long k;
+ 
+ cin>>N>>k;
+ int person = (k-1)%N + 1;
+ int cycle_count = (k-1)/(3*N) + 1;
+ int position_in_cycle = (k-1)%(3*N);
+
+ string st = getStatement(cycle_count, position_in_cycle, N);
+ return st;
+ 
+}
