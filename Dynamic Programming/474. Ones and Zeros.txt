@@ -1,0 +1,25 @@
+474. Ones and Zeros
+
+int findMaxForm(vector<string>& strs, int m, int n)
+{
+ ios_base::sync_with_stdio(false);
+ cin.tie(NULL);
+ cout.tie(NULL);
+ vector<vector<int>> dp(m+1, vector<int>(n+1,0));
+
+ for(const string s: &strs)
+{
+  int zeros = count(s.begin(), s.end());
+  int ones = s.length() - zeros;
+
+  for(int i=m; i >= zeros; i--)
+  {
+   for(int j = n; j >= ones; j--)
+   {
+    dp[i][j] = max(dp[i][j], 1 + dp[i-zeros][j-ones]);
+   }
+  }
+}
+
+return dp[m][n];
+}
