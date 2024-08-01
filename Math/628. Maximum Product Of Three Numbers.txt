@@ -1,0 +1,14 @@
+628. Maximum Product Of Three Numbers
+
+int maximumProduct(vector<int>& nums) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        int  maxi = INT_MIN;
+
+        maxi = max(nums[n-1]* nums[n-2]* nums[n-3], nums[0]*nums[1]*nums[n-1]);
+        return maxi;
+    }

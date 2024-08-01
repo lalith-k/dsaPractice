@@ -1,0 +1,13 @@
+168. Excel Sheet Column Title
+
+string convertToTitle(int c)
+{
+ res = ""; 
+ while(c > 0)
+ {
+  char ch = char((c-1)%26 + 1);
+  res += ch;
+  ch /= 26;
+ }
+ return res;
+}
