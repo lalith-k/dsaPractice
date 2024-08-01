@@ -1,0 +1,39 @@
+572. Subtree of Another Tree
+
+public:
+ bool ans = 0;
+
+ bool isSameTree(TreeNode* p, TreeNode* q) {
+
+        if(!p && !q)  {return true;}
+
+        if(!p || !q) {return false;}
+
+        bool left = isSameTree(p -> left, q -> left);
+        bool right = isSameTree(p -> right, q -> right);
+        bool value = (p->val == q-> val);
+
+        if(left && right && value) {return true;}
+
+        return false;
+    } 
+
+ void traverse(TreeNode* p, TreeNode* subRoot)
+ {
+   if(!p) {return;}
+ 
+   if(p -> val == subtree -> val && isSameTree(p,subRoot))
+    {ans = 1;}
+  
+  traverse(p -> left, subRoot);
+  traverse(p -> right, subRoot);
+ }
+
+bool isSubTree(TreeNode* root, TreeNode* subRoot)
+ {
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  
+  traverse(root, subRoot);
+  return ans;
+ }

@@ -1,0 +1,25 @@
+238. Product Of Array Except Self
+
+vector<int> productExceptSelf(vector<int>& nums)
+{
+ ios_base::sync_with_stdio(false);
+ cin.tie(NULL);
+ cout.tie(NULL);
+
+ vector<int>product(nums.size(),1);
+ int postfix = 1;
+
+ //Calc prefix array  
+ for(int i= 1; i < nums.size(); ++i)
+ {
+  product[i] = product[i-1] * nums[i-1];
+ } 
+ 
+ //for postfix part
+ for(int j = nums.size() -2; j >= 0; --j)
+ {
+  product[j] *= postfix * product[i+1];
+  postfix *= nums[i+1];
+ }
+ return product;
+}
