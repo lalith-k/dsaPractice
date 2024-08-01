@@ -1,0 +1,17 @@
+62. Unique Paths
+
+int uniquePaths(int m, int n)
+{
+ vector<int> row(n,1); 
+ vector<int> newRow(n,1);
+
+ for(int = m-2; i >=0; --i)
+ {
+  for(int j = n-2; j >=0; --j) 
+  {
+   newRow[j] = newRow[j+1] + row[j];
+  }
+  row = newRow;
+ }
+ return row[0];
+}
