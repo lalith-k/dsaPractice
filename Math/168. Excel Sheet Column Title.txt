@@ -5,7 +5,7 @@ string convertToTitle(int c)
  res = ""; 
  while(c > 0)
  {
-  char ch = char((c-1)%26 + 1);
+  char ch = char(ceil(c-1)%26 + 65);
   res += ch;
   ch /= 26;
  }
