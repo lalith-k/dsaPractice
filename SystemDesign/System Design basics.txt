@@ -1,0 +1,13 @@
+System Design basics
+
+Vertical Scaling
+Preprocessing using CRON jobs
+Backup servers
+Horizontal Scaling
+Microservices
+Distributed Systems (Partitioning)
+Load Balancing
+Decoupling
+Logging and metrics calculation
+Extensibility
+
