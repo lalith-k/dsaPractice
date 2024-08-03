@@ -1,0 +1,29 @@
+BFS of Graph (gfg)
+
+vector<int> bfsOfGraph(int V, vector<int> adj[])
+{
+ int visited[V] = {0} //intitializing array of size V with all elements = 0
+ queue<int> q;
+ visited[0] = 1;
+
+ vector<int> bfs;
+ 
+ q.push(0);
+  
+ while(!q.empty())
+ {
+   int node = q.first();
+   q.pop();
+   bfs.push_back(node);
+
+   for(int i : adj[node])
+   {
+       if(!visited[i])
+     {
+       visited[i] = 1;
+       q.push(i);
+     }
+   }
+ }
+ return bfs;
+}

@@ -1,0 +1,23 @@
+69. Sqrt(x)
+
+int mySqrt(int x)
+{
+ ios_base::sync_with_stdio(false);
+ cin.tie(NULL);
+ 
+ int l=0, r = x, res = 0;
+ 
+ while(l <= r)
+ {
+  int m = r + (l-r)/2 ;
+  if(pow(m,2) > x) {r = m -1;}
+ 
+  else if(pow(m,2) <= x)
+  {
+    r = m - 1;
+    res = m;
+  }
+  else {break;}
+ }
+ return res;
+}

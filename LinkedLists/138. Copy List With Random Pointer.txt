@@ -1,0 +1,41 @@
+138. Copy List With Random Pointer
+
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+
+Node* copyRandomList(Node* head)
+{
+ if(!head) {return NULL;}
+ 
+ Node* copiedNode = head;
+ 
+ unordered_map<Node*, Node*> ans;
+ 
+ while(copiedNode != NULL) 
+ {
+   ans[copiedNode] = new Node(copiedNode -> val);
+   copiedNode = copiedNode -> next;
+ } 
+
+ copiedNode = head;
+ 
+ while(copiedNode)
+ {
+  ans[copiedNode] -> next = ans[copiedNode -> next];
+  ans[copiedNode] -> random = ans[copiedNode -> random];
+  copiedNode = copiedNode -> next;
+ }
+
+ return ans[head];
+ 
+}

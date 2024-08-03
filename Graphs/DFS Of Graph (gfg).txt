@@ -1,0 +1,71 @@
+DFS Of Graph (gfg)
+
+void dfs(int node, vector<int> adj[], int visited[], vector<int> ls)
+{
+ visited[node] = 1;
+ ls.push_back(node);
+ 
+ for(int i: adj[node])
+ {
+  if(!visited[node])
+   {dfs(i, adj, visited, ls);}
+ }
+}
+
+vector<int> dfsofGraph(int V, vector<int> adj[])
+{
+ int visited[V] = {0};
+ vector<int> ls;
+ int start = 0; 
+ 
+ dfs(start, adj, visited, ls);
+ return ls;
+}
+
+
+
+
+void dfs(int node, vector<int> adj[], int visited[], vector<int>& ls)
+{
+ visited[node] = 1;
+ ls.push_back(node);
+
+ for(int i : adj[node]) 
+ {
+  if(!visited[i])
+   {dfs(i,adj,visited,ls);}
+ }
+}
+
+
+
+vector<int> dfsOfGraph(int V, vector<int> adj[])
+{
+ int start = 0;
+ int visited[V] = {0};
+ 
+ visited[0] = 1;
+ 
+ vector<int> ls;
+ dfs(start, adj, visited, ls);
+ return ls;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
