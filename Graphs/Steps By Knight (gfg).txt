@@ -1,0 +1,84 @@
+Steps By Knight (gfg)
+
+//for the memset() function
+#inlude <cstring>  
+
+//struct to hold state of knight
+struct cell
+{
+ int x,y,dis;
+ cell() {}
+ 
+ //parameterized constructor to pass values into the struct variables
+ cell(int x, int y, int dis) : x(x), y(y), z(z) {}
+};
+
+//utility isInside function to check if the knight is inside the checkboard
+bool isInside(int x, int y, int N)
+{
+ if(x >= 1 && x < N && y >=1 && y < N)
+  {return true;}
+ 
+ return false;
+}
+
+int stepsByKnight(vector<int>& knightPos, vector<int>& targetPos, int N)
+{
+ int dx[] = {-2,-1,1,2,-2,-1,1,2};
+ int dy[] = {-1,-2,-2,-1,1,2,2,1}; 
+ 
+ int x, y;
+ cell t;
+ queue<cell> q;
+ int visited[N+1][N+1];
+ 
+ q.push(cell(knightPos[0], knightPos[1], 0));
+ memset(visited, false, sizeof(visited));
+ 
+ while(!q.empty())
+ {
+  t = q.front();
+  q.pop();
+ 
+  if(t.x == targetPos[0] && t.y == targetPos[1])
+   {return t.dis;}
+ 
+  for(int i = 0; i < N; ++i)
+  {
+   x = t.x + dx[i];
+   y = t.y + dy[i];
+ 
+   if(isInside(x,y,N+1) && !visited[x][y])
+   {
+     visited[x][y] = true;
+     q.push(cell(x,y,t.dis + 1));
+   } 
+  }
+ }
+ 
+ return -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
