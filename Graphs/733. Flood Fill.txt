@@ -1,0 +1,26 @@
+733. Flood Fill
+
+void dfs(vector<vector>& image, int sr, int sc, int row, int col, int color, int originalColor)
+{
+  if(sr < 0 || sr >= row || sc< 0 || sc >= col || image[sr][sc] != originalColor)
+  {return;}
+ 
+ image[sr][sc] = color;
+ 
+ dfs(image, sr-1, sc, row, col, color, originalColor);
+ dfs(image, sr+1, sc, row, col, color, originalColor);
+ dfs(image, sr, sc-1, row, col, color, originalColor);
+ dfs(image, sr, sc+1, row, col, color, originalColor); 
+}
+
+vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color)
+{
+ int row = image.size();
+ int col = image[0].size();
+  
+ int originalColor = image[sr][sc];
+ if(originalColor == color) {return image;}
+ 
+ dfs(image, sr, sc, row, col, color, originalColor);
+ return image;
+}
