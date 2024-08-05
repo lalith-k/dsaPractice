@@ -1,0 +1,41 @@
+Find the number of islands (gfg)
+
+=> Similar to Number Of Islands (Leetcode 200)
+ We need to consider the diagonal directions and mark them to zero here ashte
+
+void mark1To0(vector<vector<char>>& grid, int i, int j, int row, int col)
+{
+ grid[i][j] = '0';
+ 
+ vector<pair<int,int>> directions;
+ directions = {{-1,0}, {1,0}, {0,-1}, {0,1}, {-1,-1}, {-1,1}, {1,-1}, {1,1}};
+ 
+ for(auto dir : directions)
+ {
+  int new_i = i + dir.first;
+  int new_j = j + dir.second;
+ 
+  if(new_i >=0 && new_i < row && new_j >=0 && new_j < col && grid[new_i][new_j] == '1')
+  {
+   mark1To0(grid,new_i,new_j,row,col);
+  }
+ }
+}
+
+int numIslands(vector<vector<char>>& grid)
+{
+ int row = grid.size();
+ int col = grid[0].size();
+ int res = 0;
+ 
+ for(int i=0 ; i < row; ++i)
+ {
+  for(int j = 0; j < col; ++j)
+  {
+   if(grid[i][j] == '0') {continue;}
+   res++;
+   mark1To0(grid,i,j,row,col);   
+  }
+ }
+ return res;
+}

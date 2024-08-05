@@ -1,0 +1,43 @@
+938. Range Sum Of BST
+
+I> My Sol
+void sumBST(TreeNode* node, int low, int high, int& sum)
+    {
+      if(!node) {return;}
+
+      if(low <= node -> val && node -> val <= high) {
+        sum += node -> val;
+        sumBST(node -> left, low, high, sum);
+        sumBST(node -> right, low, high, sum);        
+        }
+       else if(low > node -> val) {sumBST(node -> right, low, high, sum);}
+
+       else if(node -> val > high) {sumBST(node -> left, low, high, sum);}
+
+       else {return;}
+
+    }
+
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        int sum=0;
+        if(!root) {return 0;}
+
+        sumBST(root,low,high,sum);
+        return (sum);        
+    }
+
+
+
+II. Leetcode Sol
+int rangeSumBST(TreeNode* root, int low, int high)
+{
+ if(!root) {return 0;}
+ 
+ if(low < root -> val && root -> val < high) {return root -> val + rangeSumBST(root -> left, low, high) + rangeSumBST(root -> right, low, high);}
+ 
+ else if(low > root -> val) {sumBST(root -> right, low, high);}
+ 
+ else if(high < root -> val) {sumBST(root -> left, low, high);}
+ 
+ else {return 0;}
+}

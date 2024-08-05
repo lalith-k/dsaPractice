@@ -1,0 +1,53 @@
+101. Symmetric Tree
+
+I. Recursive
+
+bool isMirror(TreeNode* l, TreeNode* r)
+{
+ if(!l && !r) {return true;}
+ 
+ else if(!l || !r) {return false;}
+ 
+ else if(l -> val != r -> val) {return false;}
+ 
+ return (isMirror(l -> left, r -> right) && isMirror(r -> left, l -> right));
+}
+
+bool isSymmetric(TreeNode* root)
+{
+ if(!root) {return true;}
+ 
+ TreeNode* l = root -> left;
+ TreeNode* r = root -> right;
+ 
+ return isMirror(l,r);
+}
+
+II. Iterative
+
+bool isSymmetric(TreeNode* root)
+{
+ if(!root) {return true;}
+ queue<TreeNode*> q;
+ q.push(root);
+ q.push(root -> left);
+q.push(root -> right);
+ 
+ while(!q.empty())
+ {
+  TreeNode* l = root -> right; 
+  q.pop();
+  TreeNode* r = root -> left;
+  q.pop();
+  
+ if(!l && !r) {continue;}
+ if(!l || !r) {return false;}
+ if(l -> val != r -> val) {return false;}
+ 
+ q.push(l -> left);
+ q.push(r -> right);
+ q.push(l -> right);
+ q.push(r -> left);
+ }
+ return true;
+}
