@@ -1,0 +1,48 @@
+98. Validate BST
+
+I.Beaut Sol
+bool valid(TreeNode* node, double left, double right)
+    {
+         if(!node) {return true;}
+
+        if(!(left < node -> val && node -> val < right))
+        {return false;}
+
+        return (valid(node->left, left, node -> val) && valid(node -> right, node -> val, right));
+        
+    }
+
+    bool isValidBST(TreeNode* root) {
+        if(!root) {return true;}
+
+        
+        double left = -numeric_limits<double>::infinity();
+        double right = numeric_limits<double>::infinity();
+
+        bool b = valid(root,left,right);
+        return b;
+    }
+
+II. Efficient sol
+ void inorderTraversal(TreeNode* node, vector<int>& ans)
+    {
+     if(!node) {return;}
+
+     inorderTraversal(node -> left, ans);
+     ans.push_back(node -> val);
+     inorderTraversal(node -> right, ans);
+    }
+    
+    bool isValidBST(TreeNode* root)
+    {
+         if(!root) {return true;}
+        vector<int> ans;
+        
+        inorderTraversal(root, ans);
+        for(int i = 1; i < ans.size(); ++i)
+        {
+         if(ans[i-1] >= ans[i]) {return false;}
+        }
+
+        return true;
+    }
