@@ -1,0 +1,40 @@
+1743. Restore the array from adjacent pairs
+
+void dfs(unordered_map<int, vector<int>>& umap, int head, unordered_set<int>v, vector<int>& ans)
+{
+ if(v.find(head) != v.end()) {return;}
+ v.insert(head);
+ ans.push_back(head);
+ 
+ for(auto m: umap[head])
+ { 
+  dfs(umap,m,v,ans);
+ }
+}
+
+vector<int> restoreArray(vector<vector<int>>& A)
+{
+ unordered_map<int, vector<int>> umap;
+ 
+ //Making the graph
+ for(auto a : A)
+ {
+  umap[a[0]].push_back(a[1]);
+  umap[a[1]].push_back(a[0]); 
+ }
+ 
+ //find head
+ int head;
+ for(auto m : umap)
+ {
+  if(m.second.size() == 1) 
+  {
+   head = m.first;
+   break;
+  }
+ }
+ unordered_set<int> v;
+ vector<int> ans;
+ dfs(umap,head,v,ans);
+ return ans;
+}

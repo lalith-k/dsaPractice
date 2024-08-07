@@ -1,0 +1,37 @@
+Task Times (Arista Test)
+
+TASK IS TO RETURN MIN TIME FOR EXECUTION
+
+bool compareDesc(pair<int,int>& a, pair<int,int>& b)
+{
+ return a > b;
+}
+
+int minTimeToCompleteTasks(vector<int> time, int processTimeA, int processTimeB)
+{
+ vector<pair<int,int>> a;
+ int timeA=0, timeB=0;
+ int totalTimeA = 0, totaltimeB = 0;
+ 
+ for(int i : time) 
+ {
+  timeA = processTimeA*i;
+  timeB = processTimeB*i;
+  a.push_back(make_pair(timeA,timeB));
+ }
+ 
+ //Sorts the pairs in descending order
+ sort(a.begin(), a.end(), compareDesc);
+ 
+ //Greedy part 
+ for(const auto& p: a)
+ {
+  if(totalTimeA < totalTimeB)
+   {totalTimeA += p.first;}
+  else 
+   {totalTimeB += p.second;}
+ }
+
+ return max(totalTimeA, totalTimeB);
+ 
+}

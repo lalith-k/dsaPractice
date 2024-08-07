@@ -1,0 +1,68 @@
+621. Task Scheduler
+
+I. Mathematical approach
+
+int leastInterval(vector<char>& tasks, int n)
+{
+ int size = tasks.size();
+ int max_freq = 0;
+ int freq[26] = {0};
+ 
+ for(char c : tasks)
+ {
+  int f = ++freq[c-'A'];
+  max_freq = max(max_freq,f);
+ }
+ 
+ int numMaxFreq = count(freq, freq + 26, max_freq);
+ int time = (max_freq - 1)*(n + 1) + numMaxFreq;
+ int maximum = max(time, size);
+ 
+ return maximum;
+}
+
+II. Using maxheap
+
+int leastInterval(vector<char>& tasks, int n)
+{
+ map<char, int> freq;
+ priority_queue<int> maxheap;
+ 
+ for(char c : tasks)
+ {
+  freq[c]++;
+ } 
+ 
+ for(auto& f : freq)
+ {
+  maxheap.push(f.second);
+ }
+ 
+ int cycles = 0;
+ while(!maxheap())
+ { 
+  vector<int> temp;
+  
+  for(int i = 0; i <= n; ++i)
+  {
+   if(!maxheap.empty())
+   {
+    temp.push_back(maxheap.top());
+    maxheap.pop();
+   }   
+  }
+  
+  for(int count: temp)
+  {
+    if(--count > 0)
+    {maxHeap.push(count);}
+  }
+ 
+  if(maxheap.empty())
+   {cycles += temp.size();}
+  else
+   {cycles += n + 1;}
+ }
+ 
+ return cycles; 
+}
