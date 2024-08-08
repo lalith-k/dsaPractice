@@ -1,0 +1,39 @@
+402. Remove Digits
+
+string removeKdigits(string num, int k) 
+{
+ stack<char> s;
+ string res = "";
+ 
+ for(char c : num)
+ { 
+   while(!s.empty() && k > 0 && s.top() > c)
+   {
+     s.pop();
+     k--;
+   }
+   
+   s.push(c);
+ }
+ 
+ //All k s must go
+ while(!s.empty() && k > 0)
+ {
+  s.pop();
+  k--;
+ }
+
+ while(!s.empty())
+ {
+  res += s.top();
+  s.pop();
+ }
+ 
+ reverse(s.begin(), s.end());
+ 
+ size_t pos = res.find_first_not_of('0');
+ res = (pos == string::npos) ? "0" : res.substr(pos);
+
+ return res;
+  
+}

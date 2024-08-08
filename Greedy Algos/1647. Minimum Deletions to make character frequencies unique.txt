@@ -1,0 +1,31 @@
+1647. Minimum Deletions to make character frequencies unique
+
+int minDeletions(string s)
+{
+ vector<int> v(26,0);
+ 
+ for(char c : s)
+ {
+   v[c-'a']++;
+ } 
+ 
+ set<int> st;
+ int res = 0;
+ 
+ for(int i : v)
+ {
+   if(i == 0) {continue;}
+   if(st.find(i) == st.end()) {st.insert(i);}
+ 
+   else
+   {
+     while(st.find(i) != st.end())
+     {
+       i--;
+       res++;
+     }
+     if(i != 0) {st.insert(i);}
+   }
+ }
+ return res;  
+}
