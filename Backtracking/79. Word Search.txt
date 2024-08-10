@@ -1,0 +1,114 @@
+79. Word Search
+
+I. Optimized sol using 2 maps and backtracking
+
+bool exist(vector<vector<char>>& board, string word)
+{
+ int row = word.size();
+ int col = word[0].size();
+ 
+ unordered_map<char, int> cntBoard, cntWord;
+ 
+ for(int i=0; i < row; ++i)
+ {
+  for(int j = 0; j < col; ++j)
+  {
+   cntBoard[i][j]++;
+  }
+ }
+ 
+ for(char c : word)
+ {
+  cntWord[c]++;
+ }
+ 
+ //For optimizing backtracking
+ 
+ if(cntWord[word[0]] > cntWord[word[word.size() - 1]])
+ {reverse(word.begin(), word.end());}
+ 
+ //vectors initialized for checking directions
+ vector<int> dx = {-1,0,+1,0};
+ vector<int> dy = {0, +1, 0, -1};
+ 
+ //recursive function with backtracking
+ function backtrack<bool(int,int,int)> = [&](int i, int j, int index)
+ {
+  if(index == word.length()) {return true;}
+   
+  if(i < 0 || j < 0 || i >= row || j >= col)
+   {return false;}
+ 
+  //for backtracking
+   char temp = board[i][j];
+   board[i][j] = ' '; //marking as visited
+
+  for(int k = 0; k < 4; ++k)
+   {if(backtrack(i + dx[k], j + dy[k], index + 1)) {return true;}}
+ 
+  //backtrack
+   board[i][j] = temp;
+   return false;
+ };
+ 
+ for(int i = 0; i < row; ++i)
+ {
+  for(int j = 0; j < col; ++j)
+  {
+   if(backtrack(i,j,0)){return true;}
+  }
+ }
+ 
+ return false;
+}
+
+II. Using dfs (also backtracking)
+
+bool dfs(vector<vector<char>>& board, string& s, int i, int j, int index)
+ {
+    if(index == s.size()){
+        return true;
+    }
+
+    if(i < 0 || i >= board.size() || j < 0 || j >= board[0].size() || board[i][j]!= s[index]){
+        return false;
+    }
+
+    char temp = board[i][j];
+    board[i][j] = '!';
+
+    //exploring the 4 neighburing directions
+    vector<pair<int,int>> offsets = {{0,1}, {1,0}, {0,-1},{-1,0}};
+    for(auto offset: offsets){
+        int newRow = i + offset.first;
+        int newCol = j + offset.second;
+
+        if(dfs(board, s, newRow, newCol, index + 1)) {return true;}
+    }
+
+    board[i][j] = temp;
+    return false;
+ }
+
+    bool exist(vector<vector<char>>& board, string s) {
+        // unordered_map<char, int> umap;
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int row = board.size();
+        int col = board[0].size();
+        int i,j;
+
+        
+        for(i=0; i < row; ++i)
+        {
+            for(j=0; j < col; ++j)
+            {
+                if(dfs(board,s, i, j, 0)){return true;}
+            }
+        }
+
+        return false;
+
+    }
+

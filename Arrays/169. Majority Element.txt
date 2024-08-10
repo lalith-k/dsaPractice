@@ -1,0 +1,47 @@
+169. Majority Element
+
+I. Smart Approach 
+int majorityElement(vector<int>& nums)
+{
+ int curr=0, count=0;
+
+ for(int num : nums)
+ {
+  if(count == 0)
+  {curr = num;}
+ 
+  if(num == curr)
+  {count++;} 
+
+  else {count--;}
+ }
+ return curr;
+}
+
+II. Using unordered map
+
+    int majorityElement(vector<int>& nums) {
+     ios_base::sync_with_stdio(false);
+     cin.tie(NULL);
+     int n = nums.size();
+     unordered_map<int, int> umap;
+
+     for(int i: nums)
+     {
+        umap[i]++;
+     }   
+
+     int max=INT_MIN;
+     int pos;
+
+     for(auto j : umap)
+     {
+        if(j.second > max)
+        {max = j.second;
+        pos = j.first;}
+        
+        else {continue;}
+     }
+
+     return pos;
+}
