@@ -1,0 +1,26 @@
+77. Combinations
+
+void backtrack(int start, vector<vector<int>>& res, vector<int>& combo, int n, int k)
+{
+ if(combo.size() == k)
+ {
+  res.push_back(combo);
+  return;
+ }
+ 
+ for(int num = start; num <= n; ++num)
+ {
+  combo.push_back(num);
+  backtrack(num+1,res,combo,n,k); 
+  combo.pop_back();
+ }
+}
+
+vector<vector<int>> combine(int n, int k)
+{
+ vector<vector<int>> res;
+ vector<int> combo;
+ 
+ backtrack(1,res,combo,n,k);
+ return res;
+}

@@ -1,0 +1,26 @@
+90. Subsets II 
+
+void backtrack(int sum, vector<int>& nums, vector<int>& combo, vector<vector<int>>& res, int n)
+{
+ res.push_back(combo);
+ 
+ for(int i = sum; i < n; ++i)
+ {
+  if(i > sum && nums[i] == nums[i-1]) {continue;}
+ 
+  combo.push_back(nums[i]);
+  backtrack(i+1,nums,combo,res,n);
+  combo.pop_back(;
+ }
+}
+
+vector<vector<int>> subsetsWithDup(vector<int>& nums)
+{
+ vector<int> combo;
+ vector<vector<int>> res;
+ 
+ int n = nums.size(); 
+ 
+ backtrack(0,nums,combo,res,n);
+ return res;
+}
