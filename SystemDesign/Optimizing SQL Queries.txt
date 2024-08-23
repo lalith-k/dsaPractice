@@ -1,0 +1,48 @@
+Optimizing SQL Queries
+
+-> By understanding the query execution plan- Using 'EXPLAIN' and 'ANALYZE'
+
+ EXPLAIN SELECT id
+ FROM orders
+ WHERE
+ order_timestamp between '2024-02-01 00:00:00' and '2024-02-03 00:00:00' 
+ OR status = 'NEW';
+
+-> Using Indexes. Indexes can be dropped and recreated without losing data but tables       can't
+   To check indexes usage, you can rely on the database system tables, like PostgreSQL pg_stat_user_indexes or the MySQL table_io_waits_summary_by_index_usage, providing up-to-date statistics about queries impacting the indexes. Once you identify used and unused indexes, evaluate the need of restructuring them in cases of workload change.
+
+-> By improving Joins: INNER JOIN is fastest, LEFT, RIGHT and OUTER JOINS need to perform some additional work and hence need to be used only when necessary
+ 
+ SELECT * 
+ FROM ORDERS LEFT JOIN USERS ON ORDERS.NAME = USERS.NAME
+ WHERE USERS.NAME IS NOT NULL 
+ 
+ The above is using a LEFT JOIN to retrieve all the rows from ORDERS, but then is  filtering for rows having USERS.NAME IS NOT NULL. Therefore is equivalent to an INNER  JOIN.
+
+ Check if you can avoid a JOIN altogether. For example, if we are performing a JOIN to verify the presence of a row in another table, we can just use the EXISTS query
+
+
+-> By using the same column type for joins
+
+-> By avoiding functions in JOIN s. In relational databases, the joins between tables should be doable using the keys and foreign keys without additional functions. If there is a need to use a function, then fix the data quality problem
+
+-> By removing unnecessary JOINs
+
+-> By avoiding functions in filtering (when we use the WHERE clause)
+
+-> By optimizing sub Queries
+
+-> By paginating results (for big tables)
+   Using the LIMIT and OFFSET is a good way to minimize the data sent to the clients
+
+-> By moving filters from HAVING to WHERE clause
+
+The WHERE filters are applied on the raw dataset, before any data transformation defined in the SELECT statement is applied
+
+The HAVING filters are applied post aggregation, therefore after all the rows have been retrieved, transformed and rolled up.
+
+-> By defining the columns to be retrieved. Avoid using SELECT * 
+
+-> By using aggregate functions like COUNT, AVG
+
+read the rest @ https://aiven.io/developer/sql-query-optimization-guide?utm_source=ethical&utm_medium=display&utm_campaign=APAC_EN_Backend&utm_content=SQL_Query_Optimization_IM01&utm_prog=dev&utm_cmp=hcduh8&ea-publisher=dailydev
